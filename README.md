@@ -4,6 +4,44 @@ Pi provider discovery through the `/.well-known/opencode` manifest that coding
 agents use. A service that publishes the manifest gets its models into
 `/model`, `/login`-free, from its own catalog.
 
+## Install
+
+```bash
+pi install git:github.com/NikolayXHD/pi-wellknown
+```
+
+## Usage
+
+Declare a provider in `~/.pi/agent/wellknown.json`. The top-level key is the
+Pi provider id, the URL is the service that answers
+`/.well-known/opencode`:
+
+```json
+{
+  "acme": {
+    "wellKnownUrl": "https://api.acme.example",
+    "defaultTransport": { "api": "openai-completions" }
+  }
+}
+```
+
+Save the API key under the provider id in `~/.pi/agent/auth.json`, or in the
+environment variable the manifest names. Start Pi: the models are in `/model`
+and in `pi --list-models`, each one selectable by its id.
+
+```bash
+pi --model acme/chat-large
+```
+
+`wellknown.example.json` shows a full config: transports per vendor, a price
+list, a cost multiplier.
+
+To try a package without installing it:
+
+```bash
+pi -e ./pi-wellknown
+```
+
 ## How it works
 
 For every provider in the config the extension does three things.
@@ -59,18 +97,6 @@ Prices are display values. Pi prints cost with a dollar sign and offers no
 currency setting, so a provider that bills in another currency should keep
 `costMultiplier` such that the printed order of magnitude stays recognizable.
 Model ratios remain exact.
-
-## Install
-
-```bash
-pi install git:github.com/NikolayXHD/pi-wellknown
-```
-
-Or try it for one run:
-
-```bash
-pi -e ./pi-wellknown
-```
 
 ## Limits
 
