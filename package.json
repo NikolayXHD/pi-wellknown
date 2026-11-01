@@ -1,0 +1,18 @@
+{
+  "name": "pi-wellknown",
+  "version": "0.1.0",
+  "description": "Pi provider discovery through the /.well-known/opencode manifest used by coding agents.",
+  "type": "module",
+  "keywords": [
+    "pi-package"
+  ],
+  "pi": {
+    "extensions": [
+      "./src/extension.ts"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*"
+  }
+}

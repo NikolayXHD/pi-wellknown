@@ -1,0 +1,44 @@
+{
+  "acme": {
+    "wellKnownUrl": "https://api.acme.example",
+    "transports": {
+      "anthropic": {
+        "api": "anthropic-messages",
+        "baseUrl": "https://api.acme.example/anthropic"
+      },
+      "google": {
+        "api": "google-generative-ai",
+        "baseUrl": "https://api.acme.example/google/v1beta"
+      },
+      "openai": {
+        "api": "openai-responses"
+      }
+    },
+    "defaultTransport": {
+      "api": "openai-completions"
+    },
+    "costMultiplier": 0.01,
+    "cacheReadsIncludedInInput": true,
+    "pricing": {
+      "url": "https://api.acme.example/pricing",
+      "modelPath": "model",
+      "unitPath": "pricing.basePricing",
+      "unitField": "unitType",
+      "priceField": "totalPrice",
+      "units": {
+        "input": "INPUT_TEXT_TOKENS",
+        "output": "OUTPUT_TEXT_TOKENS",
+        "cacheRead": "CACHED_INPUT_TEXT_TOKENS",
+        "cacheWrite": [
+          "FIVE_MINUTES_CACHE_WRITES_INPUT_TOKENS",
+          "ONE_HOUR_CACHE_WRITES_INPUT_TOKENS"
+        ]
+      }
+    },
+    "keyCommand": [
+      "sh",
+      "-c",
+      "printf %s \"$ACME_API_KEY\""
+    ]
+  }
+}
