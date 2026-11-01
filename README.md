@@ -25,9 +25,19 @@ Pi provider id, the URL is the service that answers
 }
 ```
 
-Save the API key under the provider id in `~/.pi/agent/auth.json`, or in the
-environment variable the manifest names. Start Pi: the models are in `/model`
-and in `pi --list-models`, each one selectable by its id.
+Save the API key under the provider id in `~/.pi/agent/auth.json`:
+
+```json
+{
+  "acme": {
+    "type": "api_key",
+    "key": "sk-..."
+  }
+}
+```
+
+Or put it in the environment variable the manifest names. Start Pi: the models
+are in `/model` and in `pi --list-models`, each one selectable by its id.
 
 ```bash
 pi --model acme/chat-large
